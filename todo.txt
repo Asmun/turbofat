@@ -5,6 +5,8 @@
  *https://github.com/godotengine/godot/issues/53537
  *duplicate bug without light
 -body snapshot sprite renders body once
+ -refactor: split 'DrawnThing2D' out of Body
+ -BodySnapshotSprite copies the 'DrawnThing2D'
  -render once and done
 -body snapshot rerenders as necessary
 -body snapshot is only used on certain platforms
@@ -17,6 +19,10 @@ Batching on, 1920 Polygon2Ds, 3 fps
 Batching off, 480 Polygon2Ds, 3 fps
 Batching off, 1920 Polygon2Ds, 1 fps
 
+
+Batching on, 1920 Polygon2Ds, single rect fallback, 50-60 fps
+Batching on, 1920 Polygon2Ds, single rect fallback, scissor area threshold 0.1: 50-60 fps
+
 (turbo fat)
 Torso visible, 35 creatures: 13 fps
 Torso visible, 65 creatures: 5 fps
@@ -25,3 +31,8 @@ Torso visible, 65 creatures: 60 fps
 
 
 Polygon2D is extremely slow compared to Sprite rendering  https://github.com/godotengine/godot/issues/19943
+
+https://gist.github.com/jshorty/4090ba064ca0d3634d040e7a70c4833a Render an arbitrary polygon as a sprite
+
+
+https://github.com/godotengine/godot/issues/53537 is being updated as we speak -- so, there may be a workaround like "Disable the rect flicker workaround on Android" or "Turn off the single_rect_fallback setting"

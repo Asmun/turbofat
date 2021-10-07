@@ -21,12 +21,22 @@ func _on_SnapshotTimer_timeout() -> void:
 	viewport.transparent_bg = true
 	viewport.set_size(source_image_size)
 	viewport_container.add_child(viewport)
-
-	var temp_body = _body_scene.instance()
-	temp_body.copy_from(_source_body)
-	viewport.add_child(temp_body)
-	temp_body.creature_visuals_path = temp_body.get_path_to(_creature_visuals)
-
+	
+	# draw body polygons...
+	var node_2d := Node2D.new()
+	node_2d.draw_rect(Rect2(Vector2.ZERO, source_image_size), Color.rebeccapurple)
+	viewport.add_child(node_2d)
+	
+	var polygon_2d := Polygon2D.new()
+	polygon_2d.set_polygon(PoolVector2Array([
+		Vector2(0, 0),
+		Vector2(source_image_size.x, 0),
+		Vector2(source_image_size.x, source_image_size.y),
+		Vector2(0, source_image_size.y),
+	]))
+	polygon_2d.color = Color.aquamarine
+	viewport.add_child(polygon_2d)
+	
 	# Need to yield here when "snapshotting" the first frame of a scene.
 	# As described in issue https://github.com/godotengine/godot/issues/19239
 	yield(get_tree(), "idle_frame")
