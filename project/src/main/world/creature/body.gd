@@ -59,6 +59,14 @@ func _draw() -> void:
 	_draw_neck_blend()
 
 
+func copy_from(source: Body) -> void:
+	line_color = source.line_color
+	body_color = source.body_color
+	belly_color = source.belly_color
+	shadow_color = source.shadow_color
+	editing = source.editing
+
+
 func set_creature_visuals_path(new_creature_visuals_path: NodePath) -> void:
 	creature_visuals_path = new_creature_visuals_path
 	_refresh_creature_visuals_path()

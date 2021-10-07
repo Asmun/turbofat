@@ -1,0 +1,27 @@
+*try 'polygon2d performance' demo on windows
+*try 'polygon2d performance' demo on android
+*try 'polygon2d performance' demo on android (batching off)
+*submit 2d batching performance bug
+ *https://github.com/godotengine/godot/issues/53537
+ *duplicate bug without light
+-body snapshot sprite renders body once
+ -render once and done
+-body snapshot rerenders as necessary
+-body snapshot is only used on certain platforms
+
+
+
+(demo)
+Batching on, 480 Polygon2Ds, 60 fps
+Batching on, 1920 Polygon2Ds, 3 fps
+Batching off, 480 Polygon2Ds, 3 fps
+Batching off, 1920 Polygon2Ds, 1 fps
+
+(turbo fat)
+Torso visible, 35 creatures: 13 fps
+Torso visible, 65 creatures: 5 fps
+Torso invisible, 35 creatures: 60 fps
+Torso visible, 65 creatures: 60 fps
+
+
+Polygon2D is extremely slow compared to Sprite rendering  https://github.com/godotengine/godot/issues/19943
