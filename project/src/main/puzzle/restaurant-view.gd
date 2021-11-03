@@ -131,7 +131,7 @@ func scroll_to_new_creature(new_creature_index: int = -1) -> void:
 		new_creature_index = next_creature_index()
 	set_current_creature_index(new_creature_index)
 	_restaurant_viewport_scene.get_customer().restart_idle_timer()
-	yield(get_tree().create_timer(0.5), "timeout")
+	yield(Global.yield_wait(0.5, self), "completed")
 	summon_creature(old_creature_index)
 
 

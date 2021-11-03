@@ -30,7 +30,7 @@ func _ready() -> void:
 	
 	if CurrentLevel.settings.other.skip_intro:
 		$PuzzleMusicManager.start_puzzle_music()
-		yield(get_tree().create_timer(0.8), "timeout")
+		yield(Global.yield_wait(0.8, self), "completed")
 		_start_puzzle()
 
 
@@ -76,7 +76,7 @@ func start_level_countdown() -> void:
 	$PieceManager.set_physics_process(false)
 	$Hud/HudUi/PuzzleMessages.show_message(tr("Ready?"))
 	$StartEndSfx.play_ready_sound()
-	yield(get_tree().create_timer(PuzzleState.READY_DURATION), "timeout")
+	yield(Global.yield_wait(PuzzleState.READY_DURATION, self), "completed")
 	$Hud/HudUi/PuzzleMessages.hide_message()
 	$PieceManager.set_physics_process(true)
 	$PieceManager.skip_prespawn()
@@ -265,7 +265,7 @@ func _on_Playfield_line_cleared(_y: int, total_lines: int, remaining_lines: int,
 	# Calculate whether or not the creature should say something positive about the combo.
 	# They say something after clearing [6, 12, 18, 24...] lines.
 	if remaining_lines == 0 and PuzzleState.combo >= 6 and total_lines > PuzzleState.combo % 6:
-		yield(get_tree().create_timer(0.5), "timeout")
+		yield(Global.yield_wait(0.5, self), "completed")
 		customer.play_combo_voice()
 
 

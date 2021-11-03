@@ -108,3 +108,51 @@ func should_chat() -> bool:
 func get_overworld_ui() -> OverworldUi:
 	var nodes := get_tree().get_nodes_in_group("overworld_ui")
 	return nodes[0]
+
+
+#func yield_wait(var time_sec: float, var parent: Node) -> void:
+#	if time_sec <= 0:
+#		return
+#
+#	var timer := Timer.new()
+#	timer.set_one_shot(true)
+#	timer.wait_time = time_sec
+#	timer.autostart = true
+#
+#	parent.add_child(timer)
+#	var timer_routine: GDScriptFunctionState = _yield_timeout(timer)
+#
+#	if timer_routine.is_valid():
+#		yield(timer_routine, "completed")
+#
+#	parent.remove_child(timer)
+#
+#
+#func _yield_timeout(var timer: Timer) -> GDScriptFunctionState:
+#	return yield(timer, "timeout")
+
+
+func yield_wait(var timeout : float, var parent = get_tree().get_root()):
+	if timeout <= 0:
+		return
+
+	var timer = Timer.new()
+	timer.set_one_shot(true)
+
+	# ensure that the timer object is indeed within the tree
+	yield(yield_call_deferred(parent, "add_child", timer), "completed")
+
+	timer.start(timeout)
+	var timerRoutine = _yield_wait(timer)
+
+	if timerRoutine.is_valid():
+		yield(timerRoutine, "completed")
+
+	yield(yield_call_deferred(parent, "remove_child", timer), "completed")
+
+func _yield_wait(var timer : Timer):
+	yield(timer, "timeout")
+
+func yield_call_deferred(var node, var action, var parameter):
+	node.call_deferred(action, parameter)
+	yield(get_tree(), "idle_frame")

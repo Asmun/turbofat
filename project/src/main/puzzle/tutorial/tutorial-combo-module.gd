@@ -205,17 +205,17 @@ func _on_PuzzleState_after_piece_written() -> void:
 			if PuzzleState.level_performance.pieces == 2:
 				if not hud.get_tutorial_messages().is_all_messages_visible():
 					yield(hud.get_tutorial_messages(), "all_messages_shown")
-				yield(get_tree().create_timer(3.0), "timeout")
+				yield(Global.yield_wait(3.0, self), "completed")
 				hud.set_message(tr("Oops! I can still make the cake box, but my combo already broke."))
 			if PuzzleState.level_performance.pieces >= 3:
-				yield(get_tree().create_timer(3.0), "timeout")
+				yield(Global.yield_wait(3.0, self), "completed")
 				_advance_level()
 		"tutorial/combo_4":
 			if PuzzleState.level_performance.pieces >= 4:
 				hud.set_message(tr("There, I did it!\n\nThat was tricky."))
 				if not hud.get_tutorial_messages().is_all_messages_visible():
 					yield(hud.get_tutorial_messages(), "all_messages_shown")
-				yield(get_tree().create_timer(3.0), "timeout")
+				yield(Global.yield_wait(3.0, self), "completed")
 				_advance_level()
 		"tutorial/combo_5":
 			if hud.skill_tally_item("CakeBox").is_complete():

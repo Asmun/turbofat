@@ -113,7 +113,7 @@ func prepare_and_start_game() -> void:
 		# when skipping the intro, we don't pause between preparing/starting the game
 		pass
 	else:
-		yield(get_tree().create_timer(READY_DURATION), "timeout")
+		yield(Global.yield_wait(READY_DURATION, self), "completed")
 		if get_tree().paused:
 			# If the player pauses during the initial countdown, we wait to start until the game is unpaused.
 			yield(Pauser, "paused_changed")
@@ -159,7 +159,7 @@ func end_game() -> void:
 			yield_duration = 4.2
 		Levels.Result.NONE:
 			yield_duration = 0.0
-	yield(get_tree().create_timer(yield_duration), "timeout")
+	yield(Global.yield_wait(yield_duration, self), "completed")
 	emit_signal("after_game_ended")
 
 
@@ -167,7 +167,7 @@ func change_level(level_id: String, delay_between_levels: float = DELAY_SHORT) -
 	emit_signal("before_level_changed", level_id)
 	
 	if delay_between_levels:
-		yield(get_tree().create_timer(delay_between_levels), "timeout")
+		yield(Global.yield_wait(delay_between_levels, self), "completed")
 	
 	var settings := LevelSettings.new()
 	settings.load_from_resource(level_id)

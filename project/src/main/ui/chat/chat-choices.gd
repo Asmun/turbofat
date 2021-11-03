@@ -152,7 +152,7 @@ func _refresh_child_buttons() -> void:
 			var button: ChatChoiceButton = button_object
 			button.pop_in()
 			$PopSound.play()
-			yield(get_tree().create_timer(pop_in_delay), "timeout")
+			yield(Global.yield_wait(pop_in_delay, self), "completed")
 
 
 func _on_ChatChoiceButton_focus_entered() -> void:
