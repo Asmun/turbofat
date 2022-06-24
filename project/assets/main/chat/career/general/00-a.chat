@@ -10,7 +10,7 @@ sensei, s1, kitchen_1
 s1: You seem confused. Are you... looking for something?
  (player faces left)
  (player mood /._.)
-p1: I can't find any utensils, do we have a spatula somewhere?
+p1: I can't find any utensils. Do we have a spatula somewhere?
  (player faces right)
 s1: ^N^ You don't need a spatula. A real chef cooks with their bare pans.
 p1: Their bare... pans? What about spoons? Forks? Knives?
