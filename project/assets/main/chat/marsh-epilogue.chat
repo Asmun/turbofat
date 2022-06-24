@@ -48,8 +48,8 @@ p1: /._. Well, besides that. Did we even do anything while we were there?
 p1: We only finished with a handful of extra customers, and we still don't know why they came.
 p1: <_< They could stop showing up next week, and we'd be back to square one.
  (stop_walking)
-s1: ^Y^ Well. ...For now it's just a handful of customers, but that will change in time.
-s1: There's an old saying, 'even the greatest avalanche starts with a single snowflake.'
+s1: ^Y^ Well... For now it's just a handful of customers, but that will change in time.
+s1: There's an old saying, 'Even the greatest avalanche starts with a single snowflake.'
  (start_walking)
 p1: @_@ ...the GREATEST avalanche?
 s1: ^_^ Three or four customers now will become thirty or forty.
